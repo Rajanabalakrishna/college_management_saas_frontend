@@ -1,17 +1,10 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark,
-  ));
-  runApp(const AcademicApp());
-}
+
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -22,30 +15,7 @@ const kTextMuted = Color(0xFF6B7280);
 const kTextFaint = Color(0xFF9CA3AF);
 const kSurface = Color(0xFFF9F9FF);
 
-// ─── App Root ─────────────────────────────────────────────────────────────────
 
-class AcademicApp extends StatelessWidget {
-  const AcademicApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Academic Departments',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: kPrimary,
-          brightness: Brightness.light,
-        ),
-        textTheme: GoogleFonts.interTextTheme(),
-      ),
-      home: const MainShell(),
-    );
-  }
-}
-
-// ─── Main Shell ───────────────────────────────────────────────────────────────
 
 class MainShell extends StatefulWidget {
   const MainShell({super.key});

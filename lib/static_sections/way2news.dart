@@ -1,50 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark,
-  ));
-  runApp(const CollegeFeedApp());
-}
 
-// ─────────────────────────────────────────────
-//  APP ROOT
-// ─────────────────────────────────────────────
-class CollegeFeedApp extends StatelessWidget {
-  const CollegeFeedApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Campus Feed',
-      debugShowCheckedModeBanner: false,
-      theme: _buildTheme(),
-      home: const FeedScreen(),
-    );
-  }
 
-  ThemeData _buildTheme() {
-    return ThemeData(
-      useMaterial3: true,
-      colorScheme: const ColorScheme.light(
-        primary: Color(0xFF24389C),
-        primaryContainer: Color(0xFFDEE0FF),
-        secondary: Color(0xFF004C44),
-        secondaryContainer: Color(0xFF85F6E5),
-        error: Color(0xFFBA1A1A),
-        surface: Color(0xFFF5F5F7),
-        onSurface: Color(0xFF1A1C1C),
-        onSurfaceVariant: Color(0xFF454652),
-        outlineVariant: Color(0xFFC5C5D4),
-      ),
-      fontFamily: 'WorkSans',
-      scaffoldBackgroundColor: const Color(0xFFF0F2F8),
-    );
-  }
-}
+
+
 
 // ─────────────────────────────────────────────
 //  DATA MODELS
