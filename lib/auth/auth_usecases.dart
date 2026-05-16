@@ -22,6 +22,29 @@ class LoginParams {
   });
 }
 
+class RegisterParams {
+  final String email;
+  final String password;
+  final String fullName;
+  final String collegeDomain;
+  final String role;
+  final String? imageUrl;
+  final String? rollNo;
+  final String? branch;
+
+  RegisterParams({
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.collegeDomain,
+    required this.role,
+    this.imageUrl,
+    this.rollNo,
+    this.branch,
+  });
+}
+
+
 // ── UseCases ──────────────────────────────────────────────
 class GetMeUseCase implements UseCase<User, NoParams> {
   final AuthRepository _repo;
@@ -46,4 +69,24 @@ class LogoutUseCase implements UseCase<void, NoParams> {
 
   @override
   Future<Either<Failure, void>> call(NoParams params) => _repo.logout();
+}
+
+class RegisterUseCase implements UseCase<User, RegisterParams> {
+  final AuthRepository _repo;
+
+  RegisterUseCase(this._repo);
+
+  @override
+  Future<Either<Failure, User>> call(RegisterParams params) {
+    return _repo.register(
+      email: params.email,
+      password: params.password,
+      fullName: params.fullName,
+      collegeDomain: params.collegeDomain,
+      role: params.role,
+      imageUrl: params.imageUrl,
+      rollNo: params.rollNo,
+      branch: params.branch,
+    );
+  }
 }

@@ -55,4 +55,36 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, User>> register({
+    required String email,
+    required String password,
+    required String fullName,
+    required String collegeDomain,
+    required String role,
+    String? imageUrl,
+    String? rollNo,
+    String? branch,
+  }) async {
+    try {
+      final user = await _remote.register(
+        email: email,
+        password: password,
+        fullName: fullName,
+        collegeDomain: collegeDomain,
+        role: role,
+        imageUrl: imageUrl,
+        rollNo: rollNo,
+        branch: branch,
+      );
+
+      return Right(user);
+    } on Failure catch (f) {
+      return Left(f);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
 }

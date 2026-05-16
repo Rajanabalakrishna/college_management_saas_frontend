@@ -7,4 +7,16 @@ abstract class AuthRepository {
       String email, String password, String collegeDomain);
   Future<Either<Failure, User>> getMe();
   Future<Either<Failure, void>> logout();
+  Future<Either<Failure, User>> register({
+    required String email,
+    required String password,
+    required String fullName,
+    required String collegeDomain,
+    required String role,
+    String? imageUrl,
+    String? rollNo,
+    String? branch,
+  });
+
+
 }

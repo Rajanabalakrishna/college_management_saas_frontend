@@ -21,6 +21,7 @@ final authUseCasesProvider = Provider<_AuthUseCases>((ref) {
   return _AuthUseCases(
     getMe:  GetMeUseCase(repo),
     login:  LoginUseCase(repo),
+    register: RegisterUseCase(repo),
     logout: LogoutUseCase(repo),
   );
 });
@@ -29,9 +30,12 @@ class _AuthUseCases {
   final GetMeUseCase  getMe;
   final LoginUseCase  login;
   final LogoutUseCase logout;
+  final RegisterUseCase register;
+
   const _AuthUseCases({
     required this.getMe,
     required this.login,
     required this.logout,
+    required this.register
   });
 }

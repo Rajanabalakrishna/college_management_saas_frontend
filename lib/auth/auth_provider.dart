@@ -65,6 +65,46 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     state = AsyncValue.data(newState);
   }
 
+  Future<bool> register({
+    required String email,
+    required String password,
+    required String fullName,
+    required String collegeDomain,
+    required String role,
+    String? imageUrl,
+    String? rollNo,
+    String? branch,
+  }) async {
+    state = const AsyncValue.data(AuthState.loading());
+
+    final result = await ref.read(authUseCasesProvider).register.call(
+      RegisterParams(
+        email: email,
+        password: password,
+        fullName: fullName,
+        collegeDomain: collegeDomain,
+        role: role,
+        imageUrl: imageUrl,
+        rollNo: rollNo,
+        branch: branch,
+      ),
+    );
+
+    return result.fold(
+          (failure) {
+        state = AsyncValue.data(AuthState.error(failure.message));
+        return false;
+      },
+          (_) {
+        state = const AsyncValue.data(AuthState.unauthenticated());
+        return true;
+      },
+    );
+  }
+
+
+
+
   Future<void> logout() async {
     state = const AsyncValue.data(AuthState.loading());
     await ref.read(authUseCasesProvider).logout.call(NoParams());
@@ -72,6 +112,8 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     await ref.read(secureStorageProvider).delete(key: StorageKeys.loggedIn);
     state = const AsyncValue.data(AuthState.unauthenticated());
   }
+
+
 }
 
 final authProvider = AsyncNotifierProvider<AuthNotifier, AuthState>(

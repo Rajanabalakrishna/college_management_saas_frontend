@@ -1,23 +1,97 @@
+
 // lib/screens/auth/login_screen.dart
+import 'package:college_management_saas/auth/auth_provider.dart';
 import 'package:college_management_saas/auth/screens/signUpScreen.dart';
 import 'package:college_management_saas/auth/screens/widgets/textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../theme/app_colors.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _collegeDomainController = TextEditingController();
+
   bool _obscurePassword = true;
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _collegeDomainController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _login() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+    final collegeDomain = _collegeDomainController.text.trim();
+
+    if (email.isEmpty || password.isEmpty || collegeDomain.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Email, password and college domain are required'),
+        ),
+      );
+      return;
+    }
+
+    await ref.read(authProvider.notifier).login(
+      email,
+      password,
+      collegeDomain,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authAsync = ref.watch(authProvider);
+
+    final isLoading = authAsync.when(
+      data: (authState) {
+        return authState.maybeWhen(
+          loading: () => true,
+          orElse: () => false,
+        );
+      },
+      loading: () => true,
+      error: (_, __) => false,
+    );
+
+    ref.listen<AsyncValue<AuthState>>(authProvider, (previous, next) {
+      next.when(
+        data: (authState) {
+          authState.maybeWhen(
+            authenticated: (_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Login successful')),
+              );
+            },
+            error: (message) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(message)),
+              );
+            },
+            orElse: () {},
+          );
+        },
+        loading: () {},
+        error: (error, stackTrace) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(error.toString())),
+          );
+        },
+      );
+    });
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Center(
@@ -41,13 +115,13 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Logo or Icon
                 const Icon(
                   Icons.school_rounded,
                   size: 64,
                   color: AppColors.primary,
                 ),
                 const SizedBox(height: 24),
+
                 const Text(
                   'Welcome Back',
                   textAlign: TextAlign.center,
@@ -58,6 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
+
                 const Text(
                   'Sign in to access your dashboard',
                   textAlign: TextAlign.center,
@@ -85,7 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   isPassword: _obscurePassword,
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                       color: AppColors.outline,
                     ),
                     onPressed: () {
@@ -94,6 +171,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                   ),
+                ),
+                const SizedBox(height: 20),
+
+                CustomTextField(
+                  label: 'College Domain',
+                  hint: 'example.edu',
+                  prefixIcon: Icons.account_balance_outlined,
+                  controller: _collegeDomainController,
                 ),
                 const SizedBox(height: 12),
 
@@ -113,9 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
 
                 ElevatedButton(
-                  onPressed: () {
-                    // Handle Login
-                  },
+                  onPressed: isLoading ? null : _login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: AppColors.onPrimary,
@@ -125,9 +208,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     elevation: 0,
                   ),
-                  child: const Text(
+                  child: isLoading
+                      ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: AppColors.onPrimary,
+                    ),
+                  )
+                      : const Text(
                     'Sign In',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -141,7 +236,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const SignupScreen()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SignupScreen(),
+                          ),
+                        );
                       },
                       child: const Text(
                         'Sign Up',
