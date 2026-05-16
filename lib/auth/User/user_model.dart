@@ -10,6 +10,8 @@ class User {
   final String?  rollNo;
   final String?  className;
   final String?  sec;
+  final String? imageUrl;
+
   final int?     startingYear;
   final int?     endingYear;
   final String?  branch;
@@ -24,6 +26,8 @@ class User {
     required this.isActive,
     required this.createdAt,
     this.rollNo,
+    this.imageUrl,
+
     this.className,
     this.sec,
     this.startingYear,
@@ -41,6 +45,8 @@ class User {
       role:         json['role']        as String,
       isActive:     json['is_active']   as bool,
       createdAt:    DateTime.parse(json['created_at'] as String),
+      imageUrl: json['image_url'] as String?,
+
       rollNo:       json['roll_no']     as String?,
       className:    json['class']       as String?,
       sec:          json['sec']         as String?,
@@ -58,6 +64,8 @@ class User {
     'full_name':    fullName,
     'role':         role,
     'is_active':    isActive,
+    'image_url':    imageUrl,
+
     'created_at':   createdAt.toIso8601String(),
     'roll_no':      rollNo,
     'class':        className,
