@@ -1,3 +1,4 @@
+import 'package:college_management_saas/auth/screens/login_Screen.dart';
 import 'package:college_management_saas/college_places_section.dart';
 import 'package:college_management_saas/static_sections/branches_section.dart';
 import 'package:college_management_saas/static_sections/explore_screen.dart';
@@ -46,6 +47,9 @@ class _CampusExploreScreenState extends State<CampusExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(actions: [IconButton(onPressed: (){
+        Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
+      }, icon: Icon(Icons.person))],),
       backgroundColor: AppColors.background,
       extendBody: true,
       // ── IndexedStack is the ONLY way pages are switched ───────────────────
