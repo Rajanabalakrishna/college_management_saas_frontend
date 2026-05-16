@@ -1,6 +1,7 @@
 import 'package:college_management_saas/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'screens/campus_explore_screen.dart';
 import 'theme/app_colors.dart';
 
@@ -12,7 +13,12 @@ void main() {
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-  runApp(const AcademyHQApp());
+  runApp(
+    const ProviderScope(
+      child: AcademyHQApp(),
+    ),
+  );
+
 }
 
 class AcademyHQApp extends StatelessWidget {

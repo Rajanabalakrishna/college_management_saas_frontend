@@ -1,31 +1,36 @@
-
-
-
-
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:college_management_saas/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
 import 'home_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navigate to the next screen after 4 seconds
+
+    Future.microtask(() {
+      ref.read(authProvider.future);
+    });
+
     Timer(const Duration(seconds: 4), () {
+      if (!mounted) return;
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const CampusExploreScreen() ),
+        MaterialPageRoute(
+          builder: (context) => const CampusExploreScreen(),
+        ),
       );
     });
   }
@@ -33,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Adjust color to match your animation background
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,7 +1,7 @@
 class ApiConstants {
   ApiConstants._();
 
-  static const String baseUrl = 'http://10.0.2.2:3000'; // Android emulator
+  static const String baseUrl = 'https://overrashly-vicissitudinous-ayla.ngrok-free.dev'; // Android emulator
   // static const String baseUrl = 'http://localhost:3000'; // iOS simulator
 
   static const String login   = '/auth/login';
