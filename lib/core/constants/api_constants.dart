@@ -19,6 +19,6 @@ class CloudinaryConstants {
   static const String cloudName = 'dtixqjrml';
   static const String apiKey = '215651613889572';
   static const String apiSecret = 'ji-4CLRIhDjYDbKW0hr04wuyGYg';
-  static const String uploadPreset = 'YOUR_UNSIGNED_UPLOAD_PRESET'; // Replace with your actual upload preset from Cloudinary settings
+  static const String uploadPreset = 'college_saas'; // Replace with your actual upload preset from Cloudinary settings
   static const String folder = 'college-management/users';
 }
