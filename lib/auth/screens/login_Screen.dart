@@ -6,6 +6,7 @@ import 'package:college_management_saas/auth/screens/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../home_screen.dart';
 import '../../theme/app_colors.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -73,7 +74,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             authenticated: (_) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Login successful')),
+
+
+
               );
+
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const CampusExploreScreen(),
+                ),
+              );
+
+
+
             },
             error: (message) {
               ScaffoldMessenger.of(context).showSnackBar(

@@ -1,8 +1,9 @@
 class ApiConstants {
   ApiConstants._();
 
-  static const String baseUrl = 'https://overrashly-vicissitudinous-ayla.ngrok-free.dev'; // Android emulator
+  //static const String baseUrl = ''; // Android emulator
   // static const String baseUrl = 'http://localhost:3000'; // iOS simulator
+  static const String baseUrl = 'https://overrashly-vicissitudinous-ayla.ngrok-free.dev/api/v1';
 
   static const String login   = '/auth/login';
   static const String logout  = '/auth/logout';

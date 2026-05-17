@@ -21,7 +21,12 @@ class AuthRepositoryImpl implements AuthRepository {
       String collegeDomain,
       ) async {
     try {
-      final data = await _remote.login(email, password, collegeDomain);
+
+      final response = await _remote.login(email, password, collegeDomain);
+
+      final data = response['data'] as Map<String, dynamic>;
+
+
 
       final accessToken = data['accessToken'] as String;
       final refreshToken = data['refreshToken'] as String;

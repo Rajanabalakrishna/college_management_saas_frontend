@@ -143,7 +143,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         imageUrl = await _cloudinaryService.uploadImage(_selectedImage!);
       }
 
-      await ref.read(authProvider.notifier).register(
+     final success= await ref.read(authProvider.notifier).register(
         email: email,
         password: password,
         fullName: fullName,
@@ -153,6 +153,13 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         rollNo: _selectedRole == 'Student' && rollNo.isNotEmpty ? rollNo : null,
         branch: _selectedRole == 'Student' && branch.isNotEmpty ? branch : null,
       );
+
+      if (!success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Registration failed')),
+        );
+        return;
+      }
 
       if (!mounted) return;
 
