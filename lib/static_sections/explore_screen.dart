@@ -1,6 +1,9 @@
 import 'package:college_management_saas/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
+import '../Materials/screens/materials_Screen.dart';
+import '../home_screen.dart';
  // your AppColors file
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -421,7 +424,15 @@ class _FeatureTile extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
-          // TODO: route to feature screen
+          if (item.label == 'Library' || item.label == 'Syllabus') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const EduGlassScreen(),
+              ),
+            );
+          }
+
         },
         splashColor: AppColors.primaryContainer,
         highlightColor: AppColors.primaryContainer.withValues(alpha: 0.4),
