@@ -55,7 +55,7 @@ class _JwtInterceptor extends Interceptor {
       try {
         final res = await _dio.post(
           ApiConstants.refresh,
-          data: {'refreshToken': refresh},
+          data: {'refresh_token': refresh},
         );
 
         final newToken = res.data['accessToken'] as String;

@@ -94,7 +94,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> logout(String refreshToken) async {
     try {
       await _dio.post(ApiConstants.logout,
-          data: {'refreshToken': refreshToken});
+          data: {'refresh_token': refreshToken});
     } on DioException catch (e) {
       throw ServerFailure(
           e.response?.data?['message'] as String? ?? 'Logout failed');
