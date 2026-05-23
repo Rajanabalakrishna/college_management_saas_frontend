@@ -58,7 +58,12 @@ class _JwtInterceptor extends Interceptor {
           data: {'refresh_token': refresh},
         );
 
-        final newToken = res.data['accessToken'] as String;
+       // final newToken = res.data['accessToken'] as String;
+        final data = res.data['data'] as Map<String, dynamic>;
+        final newToken = data['accessToken'] as String;
+        final newRefreshToken = data['refreshToken'] as String;
+
+        await _storage.write(key: StorageKeys.refreshToken, value: newRefreshToken);
         final expiry = _expiryFromJwt(newToken);
 
         await _storage.write(key: StorageKeys.accessToken, value: newToken);
