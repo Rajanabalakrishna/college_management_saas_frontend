@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../Assignments/presentation/screens/assignments_screen.dart';
+import '../Id_Section/student_identity_screen.dart';
 import '../Materials/screens/materials_Screen.dart';
 import '../home_screen.dart';
  // your AppColors file
@@ -441,6 +442,18 @@ class _FeatureTile extends StatelessWidget {
               ),
             );
           }
+
+
+          if (item.label == 'ID Card') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const StudentIdentityScreen(),
+              ),
+            );
+            return;
+          }
+
 
 
 
