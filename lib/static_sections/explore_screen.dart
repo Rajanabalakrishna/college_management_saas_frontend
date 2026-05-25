@@ -5,6 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../Assignments/presentation/screens/assignments_screen.dart';
 import '../Id_Section/student_identity_screen.dart';
 import '../Materials/screens/materials_Screen.dart';
+import '../Results/presentation/screens/results_screen.dart';
+import '../attendance/presentation/screens/attendance_screen.dart';
 import '../home_screen.dart';
  // your AppColors file
 
@@ -453,6 +455,24 @@ class _FeatureTile extends StatelessWidget {
             );
             return;
           }
+
+
+          if (item.label == 'Attendance') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AttendanceScreen()),
+            );
+            return;
+          }
+
+          if (item.label == 'Results') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ResultsScreen()),
+            );
+            return ;
+          }
+
 
 
 
