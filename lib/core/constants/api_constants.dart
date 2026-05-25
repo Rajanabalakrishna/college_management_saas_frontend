@@ -28,6 +28,22 @@ class ApiConstants {
   static const String results = '/results';
   static const String myResults = '/results/me';
 
+  static const String subscriptionPlans = '/payments/subscription/plans';
+  static const String subscriptionMe = '/payments/subscription/me';
+  static const String subscriptionCreateOrder =
+      '/payments/subscription/create-order';
+
+  static const String feeInvoices = '/payments/fees/me';
+  static String payFeeInvoice(String invoiceId) =>
+      '/payments/fees/$invoiceId/pay';
+  static String feeReceipt(String receiptId) =>
+      '/payments/fees/receipts/$receiptId';
+
+  static const String saveFcmToken = '/notifications/device-token';
+  static const String notifications = '/notifications/me';
+  static String markNotificationRead(String id) =>
+      '/notifications/$id/read';
+
   static String assignmentById(String id) => '/assignments/$id';
   static String assignmentSubmissions(String id) => '/assignments/$id/submissions';
   static String assignmentMySubmission(String id) => '/assignments/$id/my-submission';

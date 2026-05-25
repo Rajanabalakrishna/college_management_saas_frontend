@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 
+
+import 'campusExploreScreen.dart';
 import 'home_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
@@ -29,7 +31,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const CampusExploreScreen(),
+         // builder: (context) => const CampusExploreScreen(),
+          builder: (context) => const AppGate(),
         ),
       );
     });

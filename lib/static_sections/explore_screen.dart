@@ -7,7 +7,10 @@ import '../Id_Section/student_identity_screen.dart';
 import '../Materials/screens/materials_Screen.dart';
 import '../Results/presentation/screens/results_screen.dart';
 import '../attendance/presentation/screens/attendance_screen.dart';
+import '../fees_receipt_screen.dart';
+import '../fees_screen.dart';
 import '../home_screen.dart';
+import '../notification_inbox_screen.dart';
  // your AppColors file
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -428,6 +431,30 @@ class _FeatureTile extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
+
+          if (item.label == 'Fees') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const FeesScreen()),
+            );
+            return;
+          }
+
+          if (item.label == 'Fee Receipt') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const FeeReceiptScreen()),
+            );
+            return;
+          }
+
+          if (item.label == 'Notices') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const NotificationInboxScreen()),
+            );
+            return;
+          }
           if (item.label == 'Assignments') {
             Navigator.push(
               context,
@@ -472,6 +499,17 @@ class _FeatureTile extends StatelessWidget {
             );
             return ;
           }
+
+          if (item.label == 'Fees') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const FeesScreen()),
+            );
+            return;
+          }
+
+
+
 
 
 
