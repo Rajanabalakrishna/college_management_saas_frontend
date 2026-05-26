@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:college_management_saas/auth/auth_provider.dart';
+import 'package:college_management_saas/saas/college_access_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -32,7 +33,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         context,
         MaterialPageRoute(
          // builder: (context) => const CampusExploreScreen(),
-          builder: (context) => const AppGate(),
+         // builder: (context) => const AppGate(),
+          builder: (context) => const CollegeAccessScreen(),
         ),
       );
     });

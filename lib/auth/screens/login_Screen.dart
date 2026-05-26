@@ -10,8 +10,12 @@ import '../../home_screen.dart';
 import '../../theme/app_colors.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  final String? initialCollegeDomain;
 
+  const LoginScreen({
+    Key? key,
+    this.initialCollegeDomain,
+  }) : super(key: key);
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
@@ -22,6 +26,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _collegeDomainController = TextEditingController();
 
   bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _collegeDomainController.text = widget.initialCollegeDomain ?? '';
+  }
 
   @override
   void dispose() {
